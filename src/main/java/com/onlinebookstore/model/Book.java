@@ -24,6 +24,6 @@ public class Book {
     private String isbn;
     @Column(nullable = false)
     private BigDecimal price;
-    private BigDecimal description;
-    private BigDecimal coverImage;
+    private String description;
+    private String coverImage;
 }
