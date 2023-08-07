@@ -1,4 +1,4 @@
-package com.onlinebookstore.dao;
+package com.onlinebookstore.repository;
 
 import com.onlinebookstore.model.Book;
 import java.util.List;

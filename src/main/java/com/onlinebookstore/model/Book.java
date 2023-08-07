@@ -1,13 +1,29 @@
 package com.onlinebookstore.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.math.BigDecimal;
+import lombok.Data;
 
+@Entity
+@Data
+@Table(name = "books")
 public class Book {
-    private Long id; // id (Long, PK)
-    private String title; // title (String, not null)
-    private String author; // author (String, not null)
-    private String isbn; // isbn (String, not null, unique)
-    private BigDecimal price; // price (BigDecimal, not null)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false)
+    private String title;
+    @Column(nullable = false)
+    private String author;
+    @Column(nullable = false, unique = true)
+    private String isbn;
+    @Column(nullable = false)
+    private BigDecimal price;
     private BigDecimal description;
     private BigDecimal coverImage;
 }
