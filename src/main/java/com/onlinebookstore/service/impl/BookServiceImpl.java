@@ -1,7 +1,7 @@
 package com.onlinebookstore.service.impl;
 
-import com.onlinebookstore.repository.BookRepository;
 import com.onlinebookstore.model.Book;
+import com.onlinebookstore.repository.BookRepository;
 import com.onlinebookstore.service.BookService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
