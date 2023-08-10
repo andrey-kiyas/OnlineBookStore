@@ -1,50 +1,70 @@
 package com.onlinebookstore.repository.impl;
 
 import com.onlinebookstore.exception.DataProcessingException;
+import com.onlinebookstore.exception.EntityNotFoundException;
 import com.onlinebookstore.model.Book;
 import com.onlinebookstore.repository.BookRepository;
-import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+@RequiredArgsConstructor
 @Repository
 public class BookRepositoryImpl implements BookRepository {
-    private final SessionFactory sessionFactory;
-
-    @Autowired
-    public BookRepositoryImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    private final EntityManagerFactory entityManagerFactory;
 
     @Override
-    public Book save(Book product) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.persist(product);
+    public Book save(Book book) {
+        EntityTransaction transaction = null;
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            entityManager.persist(book);
             transaction.commit();
-            return product;
-        } catch (Exception e) {
+            return book;
+        } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert a product: " + product, e);
+            throw new DataProcessingException("Can't insert a book: " + book, e);
+        }
+    }
+
+    @Override
+    public Optional<Book> findById(Long id) {
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+            Book book = entityManager.find(Book.class, id);
+            //return (book != null) ? Optional.of(book) : Optional.empty();
+            return Optional.ofNullable(book);
+        } catch (Exception e) {
+            throw new EntityNotFoundException("Can't find books by id: " + id);
         }
     }
 
     @Override
     public List<Book> findAll() {
-        try (Session session = sessionFactory.openSession()) {
-            CriteriaQuery<Book> criteriaQuery = session.getCriteriaBuilder()
-                    .createQuery(Book.class);
-            criteriaQuery.from(Book.class);
-            return session.createQuery(criteriaQuery).getResultList();
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+            return entityManager.createQuery("SELECT b FROM Book b", Book.class).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't find all books", e);
+            throw new EntityNotFoundException("Can't find all books");
+        }
+    }
+
+    @Override
+    public List<Book> findAllByTitle(String title) {
+        String lowerCase = title.toLowerCase();
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+            return entityManager
+                    .createQuery("SELECT b FROM Book b WHERE lower(b.title) LIKE :title",
+                            Book.class)
+                    .setParameter("title", "%" + lowerCase + "%")
+                    .getResultList();
+        } catch (Exception e) {
+            throw new EntityNotFoundException("Can't find books by filter");
         }
     }
 }
