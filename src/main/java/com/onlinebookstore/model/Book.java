@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-//@Data
 @Getter
 @Setter
 @Table(name = "books")

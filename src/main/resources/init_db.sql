@@ -1,1 +1,0 @@
-CREATE SCHEMA `online_book_store` DEFAULT CHARACTER SET utf8;

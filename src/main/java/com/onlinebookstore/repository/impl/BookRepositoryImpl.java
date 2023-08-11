@@ -1,7 +1,6 @@
 package com.onlinebookstore.repository.impl;
 
 import com.onlinebookstore.exception.DataProcessingException;
-import com.onlinebookstore.exception.EntityNotFoundException;
 import com.onlinebookstore.model.Book;
 import com.onlinebookstore.repository.BookRepository;
 import jakarta.persistence.EntityManager;
@@ -41,7 +40,7 @@ public class BookRepositoryImpl implements BookRepository {
             //return (book != null) ? Optional.of(book) : Optional.empty();
             return Optional.ofNullable(book);
         } catch (Exception e) {
-            throw new EntityNotFoundException("Can't find books by id: " + id);
+            throw new DataProcessingException("Can't find books by id: " + id, e);
         }
     }
 
@@ -50,21 +49,7 @@ public class BookRepositoryImpl implements BookRepository {
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
             return entityManager.createQuery("SELECT b FROM Book b", Book.class).getResultList();
         } catch (Exception e) {
-            throw new EntityNotFoundException("Can't find all books");
-        }
-    }
-
-    @Override
-    public List<Book> findAllByTitle(String title) {
-        String lowerCase = title.toLowerCase();
-        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
-            return entityManager
-                    .createQuery("SELECT b FROM Book b WHERE lower(b.title) LIKE :title",
-                            Book.class)
-                    .setParameter("title", "%" + lowerCase + "%")
-                    .getResultList();
-        } catch (Exception e) {
-            throw new EntityNotFoundException("Can't find books by filter");
+            throw new DataProcessingException("Can't find all books", e);
         }
     }
 }
