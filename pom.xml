@@ -21,7 +21,7 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.checkstyle.plugin.version>3.6.3</maven.checkstyle.plugin.version>
+        <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
         <maven.checkstyle.plugin.configLocation>
             checkstyle.xml
         </maven.checkstyle.plugin.configLocation>
@@ -75,6 +75,18 @@
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -89,7 +101,8 @@
                 <version>3.1.1</version>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+<!--                        <phase>compile</phase>-->
+                        <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
@@ -103,6 +116,10 @@
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
+
+                    <enableRSS>false</enableRSS>
+                    <configLocation>${basedir}/checkstyle.xml</configLocation>
+                    <propertyExpansion>checkstyle.config.path=${basedir}</propertyExpansion>
                 </configuration>
             </plugin>
             <plugin>
