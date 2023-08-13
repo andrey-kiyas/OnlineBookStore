@@ -22,9 +22,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
-<!--        <maven.checkstyle.plugin.configLocation>-->
-<!--            checkstyle.xml-->
-<!--        </maven.checkstyle.plugin.configLocation>-->
+        <maven.checkstyle.plugin.configLocation>
+            checkstyle.xml
+        </maven.checkstyle.plugin.configLocation>
         <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
         <lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
@@ -35,7 +35,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -83,9 +82,6 @@
             <version>${liquibase.version}</version>
         </dependency>
 
-
-        <!--                  -->
-
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -110,33 +106,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.1.2</version>
                 <executions>
-
                     <execution>
-                        <id>checkstyle-validation</id>
-                        <phase>validate</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
                     </execution>
-
-<!--                    <execution>-->
-<!--                        <phase>compile</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>check</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
                 </executions>
-<!--                <dependencies>-->
-<!--                    <dependency>-->
-<!--                        <groupId>com.puppycrawl.tools</groupId>-->
-<!--                        <artifactId>checkstyle</artifactId>-->
-<!--                        <version>9.2</version>-->
-<!--                    </dependency>-->
-<!--                </dependencies>-->
                 <configuration>
-                    <configLocation>checkstyle.xml</configLocation>
                     <configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
                     <sourceDirectories>${project.build.sourceDirectory},${project.build.testSourceDirectory}
                     </sourceDirectories>
@@ -146,6 +125,13 @@
                     <failOnViolation>true</failOnViolation>
                     <linkXRef>false</linkXRef>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>9.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
