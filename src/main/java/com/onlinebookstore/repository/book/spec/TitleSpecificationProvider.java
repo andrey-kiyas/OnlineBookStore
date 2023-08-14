@@ -2,20 +2,24 @@ package com.onlinebookstore.repository.book.spec;
 
 import com.onlinebookstore.model.Book;
 import com.onlinebookstore.repository.SpecificationProvider;
-import java.util.Arrays;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TitleSpecificationProvider implements SpecificationProvider<Book> {
+    private static final String FILTER_KEY = "title";
+
     @Override
     public String getKey() {
-        return "title";
+        return FILTER_KEY;
     }
 
     public Specification<Book> getSpecification(String[] params) {
-        return (root, query, criteriaBuilder) -> root
-                .get("title")
-                .in(Arrays.stream(params).toArray());
+        return (root, query, criteriaBuilder) -> {
+            Predicate predicate = criteriaBuilder.like(root.get(FILTER_KEY),
+                    "%" + params[0] + "%");
+            return criteriaBuilder.and(predicate);
+        };
     }
 }
