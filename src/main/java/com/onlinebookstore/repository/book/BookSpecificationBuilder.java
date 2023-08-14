@@ -45,9 +45,3 @@ public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
         return spec;
     }
 }
-
-
-
-
-
-
