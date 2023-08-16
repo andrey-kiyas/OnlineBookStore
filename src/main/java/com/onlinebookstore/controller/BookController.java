@@ -27,50 +27,39 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
     private final BookService bookService;
 
-    @Operation(summary = "Get all books", description = "Get a list of all available books")
-    //@Operation(summary = "Find all books", description = "Find all books")
+    @Operation(summary = "Find all books", description = "Find all books")
     @GetMapping
     public List<BookDto> findAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
-    @Operation(summary = "Get book's info by id",
-            description = "Get available book's info by id")
-    //@Operation(summary = "Find book by id", description = "Find book by id")
+    @Operation(summary = "Find book by id", description = "Find book by id")
     @GetMapping("/{id}")
     public BookDto findById(@PathVariable Long id) {
         return bookService.findById(id);
     }
 
-    @Operation(summary = "Search available books by criteria",
-            description = "Get a list of available books filtered by criteria")
-    //@Operation(summary = "Search book's by parameters",
-    //        description = "Search book's by parameters")
+    @Operation(summary = "Search book's by parameters",
+            description = "Search book's by parameters")
     @GetMapping("/search")
     public List<BookDto> search(BookSearchParameters parameters) {
         return bookService.search(parameters);
     }
 
-    @Operation(summary = "Create a new Book",
-            description = "Create a new Book")
-    //@Operation(summary = "Save a new book to DB", description = "Save a new book to DB")
+    @Operation(summary = "Save a new book to DB", description = "Save a new book to DB")
     @PostMapping
     public BookDto save(@RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.save(requestDto);
     }
 
-    @Operation(summary = "Update book's info by id",
-            description = "Update available book's info by id")
-    //@Operation(summary = "Update book data in DB", description = "Update book data in DB")
+    @Operation(summary = "Update book data in DB", description = "Update book data in DB")
     @PostMapping("/{id}")
     public BookDto update(@PathVariable Long id,
                           @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.update(id, requestDto);
     }
 
-    @Operation(summary = "Delete book record by id",
-            description = "Delete (soft) book record by id")
-    //@Operation(summary = "Delete book by id", description = "Delete book by id")
+    @Operation(summary = "Delete book by id", description = "Delete book by id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
