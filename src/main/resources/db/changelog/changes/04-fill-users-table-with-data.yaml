@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill-users-table-by-data
+      author: onlinebookstore
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: "email", value: "ivan111@gmail.com"}
+              - column: {name: "password", value: "$2a$12$zmLqQy8d2XyJMcY81P.oQ.b1vCsL8EJAiLvlODUICtQKBh7VJQ6U6"} # "111"}
+              - column: {name: "first_name", value: "Ivan"}
+              - column: {name: "last_name", value: "Ivanov"}
+              - column: {name: "shipping_address", value: "Ivanovo, 34/5"}
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: "email", value: "petr222@gmail.com"}
+              - column: {name: "password", value: "$2a$12$P/6fNMUiE9C8rPFymunCS.XUGxJMBcbbVxsxIDb8.vQp3e9fkueQC"} # "222"}
+              - column: {name: "first_name", value: "Pert"}
+              - column: {name: "last_name", value: "Pertov"}
+              - column: {name: "shipping_address", value: "Pertovo, 45/6"}
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: "email", value: "sidor333@gmail.com"}
+              - column: {name: "password", value: "$2a$12$cyV11p9/THIMjL7qiMMGMOZbmhXu9XBEQKoS/s7oIhu7/7qGBb6ZC"} # "333"}
+              - column: {name: "first_name", value: "Sidor"}
+              - column: {name: "last_name", value: "Sidorov"}
+              - column: {name: "shipping_address", value: "Sidorovo, 56/7"}
