@@ -8,5 +8,3 @@ import lombok.RequiredArgsConstructor;
 public class UserLoginResponseDto {
     private final String token;
 }
-//public record UserLoginResponseDto(String token) {
-//}

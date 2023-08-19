@@ -29,14 +29,14 @@ public class BookController {
     private final BookService bookService;
 
     @Operation(summary = "Find all books", description = "Find all books")
-    @GetMapping
     @PreAuthorize("isAuthenticated()")
+    @GetMapping
     public List<BookDto> findAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
     @Operation(summary = "Find book by id", description = "Find book by id")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{id}")
     public BookDto findById(@PathVariable Long id) {
         return bookService.findById(id);

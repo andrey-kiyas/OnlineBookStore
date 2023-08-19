@@ -1,4 +1,4 @@
-package com.onlinebookstore.repository.book.spec;
+package com.onlinebookstore.repository.spec;
 
 import com.onlinebookstore.model.Book;
 import com.onlinebookstore.repository.SpecificationProvider;
@@ -7,8 +7,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DescriptionSpecificationProvider implements SpecificationProvider<Book> {
-    private static final String FILTER_KEY = "description";
+public class PriceSpecificationProvider implements SpecificationProvider<Book> {
+    private static final String FILTER_KEY = "price";
 
     @Override
     public String getKey() {
@@ -17,8 +17,8 @@ public class DescriptionSpecificationProvider implements SpecificationProvider<B
 
     public Specification<Book> getSpecification(String[] params) {
         return (root, query, criteriaBuilder) -> {
-            Predicate predicate = criteriaBuilder.like(root.get(FILTER_KEY),
-                    "%" + params[0] + "%");
+            Predicate predicate = criteriaBuilder.between(root.get(FILTER_KEY), params[0],
+                    (params.length > 1) ? params[1] : params[0]);
             return criteriaBuilder.and(predicate);
         };
     }

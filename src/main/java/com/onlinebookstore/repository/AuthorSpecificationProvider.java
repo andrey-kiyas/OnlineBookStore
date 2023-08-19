@@ -1,14 +1,13 @@
-package com.onlinebookstore.repository.book.spec;
+package com.onlinebookstore.repository;
 
 import com.onlinebookstore.model.Book;
-import com.onlinebookstore.repository.SpecificationProvider;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PriceSpecificationProvider implements SpecificationProvider<Book> {
-    private static final String FILTER_KEY = "price";
+public class AuthorSpecificationProvider implements SpecificationProvider<Book> {
+    private static final String FILTER_KEY = "author";
 
     @Override
     public String getKey() {
@@ -17,8 +16,8 @@ public class PriceSpecificationProvider implements SpecificationProvider<Book> {
 
     public Specification<Book> getSpecification(String[] params) {
         return (root, query, criteriaBuilder) -> {
-            Predicate predicate = criteriaBuilder.between(root.get(FILTER_KEY), params[0],
-                    (params.length > 1) ? params[1] : params[0]);
+            Predicate predicate = criteriaBuilder.like(root.get(FILTER_KEY),
+                    "%" + params[0] + "%");
             return criteriaBuilder.and(predicate);
         };
     }

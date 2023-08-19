@@ -1,4 +1,4 @@
-package com.onlinebookstore.repository.book.spec;
+package com.onlinebookstore.repository.spec;
 
 import com.onlinebookstore.model.Book;
 import com.onlinebookstore.repository.SpecificationProvider;
@@ -7,8 +7,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AuthorSpecificationProvider implements SpecificationProvider<Book> {
-    private static final String FILTER_KEY = "author";
+public class DescriptionSpecificationProvider implements SpecificationProvider<Book> {
+    private static final String FILTER_KEY = "description";
 
     @Override
     public String getKey() {

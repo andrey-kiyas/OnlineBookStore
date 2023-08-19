@@ -1,4 +1,4 @@
-package com.onlinebookstore.repository.book;
+package com.onlinebookstore.repository.spec;
 
 import com.onlinebookstore.dto.book.BookSearchParameters;
 import com.onlinebookstore.model.Book;
