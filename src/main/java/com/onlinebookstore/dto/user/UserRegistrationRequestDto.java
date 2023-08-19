@@ -13,8 +13,6 @@ import lombok.Data;
         message = "Password and repeat password shouldn't be empty and should be equal"
 )
 public class UserRegistrationRequestDto {
-    @NotNull
-    @Size(min = 4, max = 50)
     @Email
     private String email;
     @NotNull
