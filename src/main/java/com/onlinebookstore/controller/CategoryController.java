@@ -30,7 +30,6 @@ public class CategoryController {
     private final BookService bookService;
 
     @Operation(summary = "Find all categories", description = "Find all categories")
-    //@PreAuthorize("isAuthenticated()")
     @GetMapping
     public List<CategoryDto> getAll(Pageable pageable) {
         return categoryService.findAll(pageable);

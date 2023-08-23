@@ -29,14 +29,12 @@ public class BookController {
     private final BookService bookService;
 
     @Operation(summary = "Find all books", description = "Find all books")
-    //@PreAuthorize("isAuthenticated()")
     @GetMapping
     public List<BookDto> findAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
     @Operation(summary = "Find book by id", description = "Find book by id")
-    //@PreAuthorize("isAuthenticated()")
     @GetMapping("/{id}")
     public BookDto findById(@PathVariable Long id) {
         return bookService.findById(id);
@@ -44,7 +42,7 @@ public class BookController {
 
     @Operation(summary = "Search book's by parameters",
             description = "Search book's by parameters")
-    //@PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/search")
     public List<BookDto> search(BookSearchParameters parameters) {
         return bookService.search(parameters);
