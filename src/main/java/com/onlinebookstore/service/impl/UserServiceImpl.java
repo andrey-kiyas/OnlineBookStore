@@ -5,8 +5,10 @@ import com.onlinebookstore.dto.user.UserResponseDto;
 import com.onlinebookstore.exception.RegistrationException;
 import com.onlinebookstore.mapper.UserMapper;
 import com.onlinebookstore.model.Role;
+import com.onlinebookstore.model.ShoppingCart;
 import com.onlinebookstore.model.User;
 import com.onlinebookstore.repository.RoleRepository;
+import com.onlinebookstore.repository.ShoppingCartRepository;
 import com.onlinebookstore.repository.UserRepository;
 import com.onlinebookstore.service.UserService;
 import java.util.HashSet;
@@ -22,6 +24,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final RoleRepository roleRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
 
     @Override
     public UserResponseDto register(UserRegistrationRequestDto request)
@@ -41,6 +44,11 @@ public class UserServiceImpl implements UserService {
         Set<Role> defaultUserRoleSet = new HashSet<>();
         defaultUserRoleSet.add(userRole);
         user.setRoles(defaultUserRoleSet);
-        return userMapper.toUserResponseDto(userRepository.save(user));
+
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUser(user);
+        shoppingCartRepository.save(shoppingCart);
+
+        return userMapper.toUserResponseDto(user);
     }
 }

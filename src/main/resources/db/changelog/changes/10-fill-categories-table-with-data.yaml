@@ -13,3 +13,8 @@ databaseChangeLog:
             columns:
               - column: {name: "name", value: "Classic"}
               - column: {name: "description", value: "Classic books"}
+#        - insert:
+#            tableName: categories
+#            columns:
+#              - column: {name: "name", value: "Horror"}
+#              - column: {name: "description", value: "Horror books"}
