@@ -1,4 +1,4 @@
-package com.onlinebookstore.dto.cart_item;
+package com.onlinebookstore.dto.cartitem;
 
 import jakarta.validation.constraints.Positive;
 import lombok.Data;

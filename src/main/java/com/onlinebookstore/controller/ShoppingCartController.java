@@ -1,7 +1,7 @@
 package com.onlinebookstore.controller;
 
-import com.onlinebookstore.dto.cart_item.CartItemRequestDto;
-import com.onlinebookstore.dto.shopping_cart.ShoppingCartResponseDto;
+import com.onlinebookstore.dto.cartitem.CartItemRequestDto;
+import com.onlinebookstore.dto.shoppingcart.ShoppingCartResponseDto;
 import com.onlinebookstore.service.ShoppingCartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

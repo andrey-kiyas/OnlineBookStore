@@ -1,7 +1,7 @@
 package com.onlinebookstore.service;
 
-import com.onlinebookstore.dto.cart_item.CartItemRequestDto;
-import com.onlinebookstore.dto.shopping_cart.ShoppingCartResponseDto;
+import com.onlinebookstore.dto.cartitem.CartItemRequestDto;
+import com.onlinebookstore.dto.shoppingcart.ShoppingCartResponseDto;
 
 public interface ShoppingCartService {
     ShoppingCartResponseDto getShoppingCart(String email);

@@ -1,8 +1,8 @@
 package com.onlinebookstore.mapper;
 
 import com.onlinebookstore.config.MapperConfig;
-import com.onlinebookstore.dto.cart_item.CartItemResponseDto;
-import com.onlinebookstore.dto.shopping_cart.ShoppingCartResponseDto;
+import com.onlinebookstore.dto.cartitem.CartItemResponseDto;
+import com.onlinebookstore.dto.shoppingcart.ShoppingCartResponseDto;
 import com.onlinebookstore.model.CartItem;
 import com.onlinebookstore.model.ShoppingCart;
 import java.util.HashSet;
