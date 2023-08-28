@@ -2,14 +2,17 @@ package com.onlinebookstore.service;
 
 import com.onlinebookstore.dto.cartitem.CartItemRequestDto;
 import com.onlinebookstore.dto.shoppingcart.ShoppingCartResponseDto;
+import com.onlinebookstore.model.ShoppingCart;
 
 public interface ShoppingCartService {
-    ShoppingCartResponseDto getShoppingCart(String email);
+    ShoppingCart getShoppingCartById(Long id);
 
-    ShoppingCartResponseDto addCartItem(String email, CartItemRequestDto cartItemRequestDto);
+    ShoppingCartResponseDto getShoppingCartDtoByUserId(Long id);
 
-    ShoppingCartResponseDto updateCartItem(String email, Long cartItemId,
+    ShoppingCartResponseDto addCartItemByUserId(Long id, CartItemRequestDto cartItemRequestDto);
+
+    ShoppingCartResponseDto updateCartItem(Long id, Long cartItemId,
                                            CartItemRequestDto cartItemRequestDto);
 
-    ShoppingCartResponseDto deleteCartItem(String email, Long cartItemId);
+    ShoppingCartResponseDto deleteCartItem(Long id, Long cartItemId);
 }

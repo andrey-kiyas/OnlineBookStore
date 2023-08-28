@@ -2,6 +2,7 @@ package com.onlinebookstore.controller;
 
 import com.onlinebookstore.dto.cartitem.CartItemRequestDto;
 import com.onlinebookstore.dto.shoppingcart.ShoppingCartResponseDto;
+import com.onlinebookstore.model.User;
 import com.onlinebookstore.service.ShoppingCartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,8 +31,8 @@ public class ShoppingCartController {
     @GetMapping
     @PreAuthorize("hasRole('USER')")
     public ShoppingCartResponseDto getShoppingCart(Authentication authentication) {
-        String email = authentication.getName();
-        return shoppingCartService.getShoppingCart(email);
+        User user = (User) authentication.getPrincipal();
+        return shoppingCartService.getShoppingCartDtoByUserId(user.getId());
     }
 
     @Operation(summary = "Add book to the shopping cart",
@@ -41,9 +42,9 @@ public class ShoppingCartController {
     public ShoppingCartResponseDto addBookToShoppingCart(
             Authentication authentication,
             @RequestBody @Valid CartItemRequestDto cartItemRequestDto) {
-        String email = authentication.getName();
-        shoppingCartService.addCartItem(email, cartItemRequestDto);
-        return shoppingCartService.getShoppingCart(email);
+        User user = (User) authentication.getPrincipal();
+        shoppingCartService.addCartItemByUserId(user.getId(), cartItemRequestDto);
+        return shoppingCartService.getShoppingCartDtoByUserId(user.getId());
     }
 
     @Operation(summary = "Update quantity of a book in the shopping cart",
@@ -54,9 +55,10 @@ public class ShoppingCartController {
             Authentication authentication,
             @PathVariable Long cartItemId,
             @RequestBody @Valid CartItemRequestDto requestDto) {
+        User user = (User) authentication.getPrincipal();
         String email = authentication.getName();
-        shoppingCartService.updateCartItem(email, cartItemId, requestDto);
-        return shoppingCartService.getShoppingCart(email);
+        shoppingCartService.updateCartItem(user.getId(), cartItemId, requestDto);
+        return shoppingCartService.getShoppingCartDtoByUserId(user.getId());
     }
 
     @Operation(summary = "Remove a book from the shopping cart",
@@ -65,8 +67,9 @@ public class ShoppingCartController {
     @PreAuthorize("hasRole('USER')")
     public ShoppingCartResponseDto deleteCartItem(Authentication authentication,
                                                   @PathVariable Long cartItemId) {
+        User user = (User) authentication.getPrincipal();
         String email = authentication.getName();
-        shoppingCartService.deleteCartItem(email, cartItemId);
-        return shoppingCartService.getShoppingCart(email);
+        shoppingCartService.deleteCartItem(user.getId(), cartItemId);
+        return shoppingCartService.getShoppingCartDtoByUserId(user.getId());
     }
 }
