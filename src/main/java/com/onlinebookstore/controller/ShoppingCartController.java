@@ -1,6 +1,7 @@
 package com.onlinebookstore.controller;
 
 import com.onlinebookstore.dto.cartitem.CartItemRequestDto;
+import com.onlinebookstore.dto.cartitem.CartItemUpdateDto;
 import com.onlinebookstore.dto.shoppingcart.ShoppingCartResponseDto;
 import com.onlinebookstore.model.User;
 import com.onlinebookstore.service.ShoppingCartService;
@@ -43,8 +44,7 @@ public class ShoppingCartController {
             Authentication authentication,
             @RequestBody @Valid CartItemRequestDto cartItemRequestDto) {
         User user = (User) authentication.getPrincipal();
-        shoppingCartService.addCartItemByUserId(user.getId(), cartItemRequestDto);
-        return shoppingCartService.getShoppingCartDtoByUserId(user.getId());
+        return shoppingCartService.addCartItemByUserId(user.getId(), cartItemRequestDto);
     }
 
     @Operation(summary = "Update quantity of a book in the shopping cart",
@@ -54,11 +54,9 @@ public class ShoppingCartController {
     public ShoppingCartResponseDto updateCartItem(
             Authentication authentication,
             @PathVariable Long cartItemId,
-            @RequestBody @Valid CartItemRequestDto requestDto) {
+            @RequestBody @Valid CartItemUpdateDto updateDto) {
         User user = (User) authentication.getPrincipal();
-        String email = authentication.getName();
-        shoppingCartService.updateCartItem(user.getId(), cartItemId, requestDto);
-        return shoppingCartService.getShoppingCartDtoByUserId(user.getId());
+        return shoppingCartService.updateCartItem(user.getId(), cartItemId, updateDto);
     }
 
     @Operation(summary = "Remove a book from the shopping cart",
@@ -68,8 +66,6 @@ public class ShoppingCartController {
     public ShoppingCartResponseDto deleteCartItem(Authentication authentication,
                                                   @PathVariable Long cartItemId) {
         User user = (User) authentication.getPrincipal();
-        String email = authentication.getName();
-        shoppingCartService.deleteCartItem(user.getId(), cartItemId);
-        return shoppingCartService.getShoppingCartDtoByUserId(user.getId());
+        return shoppingCartService.deleteCartItem(user.getId(), cartItemId);
     }
 }

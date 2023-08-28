@@ -27,8 +27,8 @@ public interface CartItemMapper {
     CartItemResponseDto toDto(CartItem cartItem);
 
     @AfterMapping
-    default void setBookId(@MappingTarget CartItem cartItem,
-                           CartItemRequestDto cartItemRequestDto) {
+    default void setBook(@MappingTarget CartItem cartItem,
+                         CartItemRequestDto cartItemRequestDto) {
         Book book = new Book();
         book.setId(cartItemRequestDto.getBookId());
         cartItem.setBook(book);
