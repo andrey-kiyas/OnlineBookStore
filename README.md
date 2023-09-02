@@ -10,7 +10,7 @@
 06 - [Spring Boot Security](https://mate.academy/learn/java-spring-boot/java-spring-boot-security?section=practice&videoId=5578&testTaskSlug=java_security "Перейти к описанию задания")  
 07 - [Spring Boot Practice - Add Category model](https://mate.academy/learn/java-spring-boot/java-spring-boot-practice-v2?section=practice&testTaskSlug=java_add_category_model "Перейти к описанию задания")  
 08 - [Spring Boot practice - Add ShoppingCart model](https://mate.academy/learn/java-spring-boot/java-spring-boot-practice-v2?section=practice&testTaskSlug=java_add_shoppingcart_model "Перейти к описанию задания")  
-
+09 - [Spring Boot practice - Add Order model](https://mate.academy/learn/java-spring-boot/java-spring-boot-practice-v2?section=practice&testTaskSlug=java_add_order_model "Перейти к описанию задания")  
 
 ---
 #### [<span style="color:grey">OpenAPI definition (SWAGGER)</span>](http://localhost:8080/api/swagger-ui/index.html#/)
