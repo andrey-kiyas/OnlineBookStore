@@ -32,7 +32,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @Operation(summary = "Place an order", description = "Place an order")
-    @PostMapping()
+    @PostMapping
     public OrderResponseDto create(Authentication authentication,
                                    @RequestBody @Valid OrderRequestDto orderRequestDto) {
         User user = (User) authentication.getPrincipal();
@@ -58,6 +58,7 @@ public class OrderController {
     @Operation(summary = "Retrieve all OrderItems for a specific order",
             description = "Retrieve all OrderItems for a specific order")
     @GetMapping("/{orderId}/items")
+    @PreAuthorize("hasRole('USER')")
     public Set<OrderItemResponseDto> findAllOrderItems(@PathVariable Long orderId) {
         return orderService.findAllOrderItems(orderId);
     }
@@ -65,6 +66,7 @@ public class OrderController {
     @Operation(summary = "Retrieve a specific OrderItem within an order",
             description = "Retrieve a specific OrderItem within an order")
     @GetMapping("/{orderId}/items/{itemId}")
+    @PreAuthorize("hasRole('USER')")
     public OrderItemResponseDto findOrderItemById(@PathVariable Long orderId,
                                                   @PathVariable Long itemId) {
         return orderService.findOrderItemById(orderId, itemId);

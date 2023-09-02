@@ -40,17 +40,7 @@ public class OrderServiceImpl implements OrderService {
         order.setShippingAddress(orderRequestDto.getShippingAddress());
         order.setUser(shoppingCart.getUser());
         order.setStatus(Order.Status.PENDING);
-        Set<OrderItem> orderItems = shoppingCart.getCartItems().stream()
-                .map(cartItem -> {
-                    OrderItem orderItem = new OrderItem();
-                    orderItem.setBook(cartItem.getBook());
-                    orderItem.setQuantity(cartItem.getQuantity());
-                    orderItem.setOrder(order);
-                    orderItem.setPrice(cartItem.getBook().getPrice()
-                            .multiply(new BigDecimal(cartItem.getQuantity())));
-                    return orderItem;
-                })
-                .collect(Collectors.toSet());
+        Set<OrderItem> orderItems = getOrderItemsFromShoppingCart(shoppingCart, order);
         order.setOrderItems(orderItems);
         order.setOrderDate(LocalDateTime.now());
         BigDecimal total = orderItems.stream()
@@ -81,6 +71,20 @@ public class OrderServiceImpl implements OrderService {
                 );
         return order.getOrderItems().stream()
                 .map(orderItemMapper::toDto)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<OrderItem> getOrderItemsFromShoppingCart(ShoppingCart shoppingCart, Order order) {
+        return shoppingCart.getCartItems().stream()
+                .map(cartItem -> {
+                    OrderItem orderItem = new OrderItem();
+                    orderItem.setBook(cartItem.getBook());
+                    orderItem.setQuantity(cartItem.getQuantity());
+                    orderItem.setOrder(order);
+                    orderItem.setPrice(cartItem.getBook().getPrice()
+                            .multiply(new BigDecimal(cartItem.getQuantity())));
+                    return orderItem;
+                })
                 .collect(Collectors.toSet());
     }
 
