@@ -17,7 +17,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("UPDATE Order o SET o.status = :status WHERE o.id = :orderId")
     void updateOrderByStatus(Long orderId, Order.Status status);
 
-    @Query("SELECT o FROM Order o LEFT JOIN FETCH o.orderItems LEFT JOIN FETCH o.user u WHERE u.id = :userId")
+    @Query("SELECT o FROM Order o LEFT JOIN FETCH o.orderItems"
+            + " LEFT JOIN FETCH o.user u WHERE u.id = :userId")
     List<Order> findAllOrders(long userId);
 
     @EntityGraph(attributePaths = "orderItems")

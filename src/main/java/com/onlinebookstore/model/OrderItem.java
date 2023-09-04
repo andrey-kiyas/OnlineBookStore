@@ -45,13 +45,17 @@ public class OrderItem {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         OrderItem orderItem = (OrderItem) o;
-        return Objects.equals(id, orderItem.id) &&
-                Objects.equals(order, orderItem.order) &&
-                Objects.equals(book, orderItem.book) &&
-                Objects.equals(price, orderItem.price);
+        return Objects.equals(id, orderItem.id)
+                && Objects.equals(order, orderItem.order)
+                && Objects.equals(book, orderItem.book)
+                && Objects.equals(price, orderItem.price);
     }
 
     @Override
