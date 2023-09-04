@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -41,4 +42,20 @@ public class OrderItem {
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderItem orderItem = (OrderItem) o;
+        return Objects.equals(id, orderItem.id) &&
+                Objects.equals(order, orderItem.order) &&
+                Objects.equals(book, orderItem.book) &&
+                Objects.equals(price, orderItem.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, order, book, price);
+    }
 }

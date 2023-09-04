@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 public interface OrderService {
     OrderResponseDto create(Long id, OrderRequestDto orderRequestDto);
 
-    List<OrderResponseDto> findAllOrders(Pageable pageable);
+    List<OrderResponseDto> findAllOrders(Long id, Pageable pageable);
 
     void updateOrderStatus(Long orderId, Order.Status status);
 

@@ -42,8 +42,10 @@ public class OrderController {
     @Operation(summary = "Retrieve user's order history",
             description = "Retrieve user's order history")
     @GetMapping
-    public List<OrderResponseDto> findAll(Pageable pageable) {
-        return orderService.findAllOrders(pageable);
+    public List<OrderResponseDto> findAll(Authentication authentication,
+                                          Pageable pageable) {
+        User user = (User) authentication.getPrincipal();
+        return orderService.findAllOrders(user.getId(), pageable);
     }
 
     @Operation(summary = "Update order status", description = "Update order status")
