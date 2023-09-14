@@ -30,6 +30,8 @@ public interface CartItemMapper {
     default void setBook(@MappingTarget CartItem cartItem,
                          CartItemRequestDto cartItemRequestDto) {
         Book book = new Book();
+//        Book book = Book.builder()
+//                .build();
         book.setId(cartItemRequestDto.getBookId());
         cartItem.setBook(book);
     }
