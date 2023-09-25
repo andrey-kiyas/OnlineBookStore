@@ -49,7 +49,7 @@ public class ShoppingCartController {
 
     @Operation(summary = "Update quantity of a book in the shopping cart",
             description = "Update quantity of a book in the shopping cart")
-    @PutMapping("cart-items/{cartItemId}")
+    @PutMapping("/cart-items/{cartItemId}")
     @PreAuthorize("hasRole('USER')")
     public ShoppingCartResponseDto updateCartItem(
             Authentication authentication,
@@ -61,7 +61,7 @@ public class ShoppingCartController {
 
     @Operation(summary = "Remove a book from the shopping cart",
             description = "Remove a book from the shopping cart")
-    @DeleteMapping("cart-items/{cartItemId}")
+    @DeleteMapping("/cart-items/{cartItemId}")
     @PreAuthorize("hasRole('USER')")
     public ShoppingCartResponseDto deleteCartItem(Authentication authentication,
                                                   @PathVariable Long cartItemId) {
