@@ -72,20 +72,10 @@ public class ShoppingCartServiceImplTest {
         when(shoppingCartMapper.toDto(Mockito.any()))
                 .thenReturn(shoppingCartResponseDto);
 
-        User user2 = new User();
-        user2.setDeleted(true);
-        user2.setEmail("jane.doe@example.org");
-        user2.setFirstName("Jane");
-        user2.setId(1L);
-        user2.setLastName("Doe");
-        user2.setPassword("iloveyou");
-        user2.setRoles(new HashSet<>());
-        user2.setShippingAddress("42 Main St");
-
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setCartItems(new HashSet<>());
         shoppingCart.setId(1L);
-        shoppingCart.setUser(user2);
+        shoppingCart.setUser(user);
         Optional<ShoppingCart> ofResult2 = Optional.of(shoppingCart);
         when(shoppingCartRepository.findByUserId(Mockito.<Long>any())).thenReturn(ofResult2);
         assertSame(shoppingCartResponseDto, shoppingCartServiceImpl.getShoppingCartDtoByUserId(1L));
@@ -170,20 +160,10 @@ public class ShoppingCartServiceImplTest {
         book.setPrice(BigDecimal.valueOf(1L));
         book.setTitle("Dr");
 
-        User user2 = new User();
-        user2.setDeleted(true);
-        user2.setEmail("jane.doe@example.org");
-        user2.setFirstName("Jane");
-        user2.setId(1L);
-        user2.setLastName("Doe");
-        user2.setPassword("iloveyou");
-        user2.setRoles(new HashSet<>());
-        user2.setShippingAddress("42 Main St");
-
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setCartItems(new HashSet<>());
         shoppingCart.setId(1L);
-        shoppingCart.setUser(user2);
+        shoppingCart.setUser(user);
 
         CartItem cartItem = new CartItem();
         cartItem.setBook(book);
@@ -204,20 +184,10 @@ public class ShoppingCartServiceImplTest {
         book2.setPrice(BigDecimal.valueOf(1L));
         book2.setTitle("Dr");
 
-        User user3 = new User();
-        user3.setDeleted(true);
-        user3.setEmail("jane.doe@example.org");
-        user3.setFirstName("Jane");
-        user3.setId(1L);
-        user3.setLastName("Doe");
-        user3.setPassword("iloveyou");
-        user3.setRoles(new HashSet<>());
-        user3.setShippingAddress("42 Main St");
-
         ShoppingCart shoppingCart2 = new ShoppingCart();
         shoppingCart2.setCartItems(new HashSet<>());
         shoppingCart2.setId(1L);
-        shoppingCart2.setUser(user3);
+        shoppingCart2.setUser(user);
 
         CartItem cartItem2 = new CartItem();
         cartItem2.setBook(book2);
@@ -237,20 +207,10 @@ public class ShoppingCartServiceImplTest {
         book3.setPrice(BigDecimal.valueOf(1L));
         book3.setTitle("Dr");
 
-        User user4 = new User();
-        user4.setDeleted(true);
-        user4.setEmail("jane.doe@example.org");
-        user4.setFirstName("Jane");
-        user4.setId(1L);
-        user4.setLastName("Doe");
-        user4.setPassword("iloveyou");
-        user4.setRoles(new HashSet<>());
-        user4.setShippingAddress("42 Main St");
-
         ShoppingCart shoppingCart3 = new ShoppingCart();
         shoppingCart3.setCartItems(new HashSet<>());
         shoppingCart3.setId(1L);
-        shoppingCart3.setUser(user4);
+        shoppingCart3.setUser(user);
 
         CartItem cartItem3 = new CartItem();
         cartItem3.setBook(book3);
@@ -311,20 +271,10 @@ public class ShoppingCartServiceImplTest {
         Optional<User> ofResult = Optional.of(user);
         when(userRepository.findById(Mockito.<Long>any())).thenReturn(ofResult);
 
-        User user2 = new User();
-        user2.setDeleted(true);
-        user2.setEmail("jane.doe@example.org");
-        user2.setFirstName("Jane");
-        user2.setId(1L);
-        user2.setLastName("Doe");
-        user2.setPassword("iloveyou");
-        user2.setRoles(new HashSet<>());
-        user2.setShippingAddress("42 Main St");
-
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setCartItems(new HashSet<>());
         shoppingCart.setId(1L);
-        shoppingCart.setUser(user2);
+        shoppingCart.setUser(user);
         Optional<ShoppingCart> ofResult2 = Optional.of(shoppingCart);
         when(shoppingCartRepository.findByUserId(Mockito.<Long>any())).thenReturn(ofResult2);
         assertSame(shoppingCart, shoppingCartServiceImpl.getShoppingCartById(1L));
