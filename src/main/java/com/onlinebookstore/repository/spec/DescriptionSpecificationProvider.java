@@ -17,7 +17,8 @@ public class DescriptionSpecificationProvider implements SpecificationProvider<B
 
     public Specification<Book> getSpecification(String[] params) {
         return (root, query, criteriaBuilder) -> {
-            Predicate predicate = criteriaBuilder.like(root.get(FILTER_KEY),
+            Predicate predicate = criteriaBuilder
+                    .like(root.get(FILTER_KEY),
                     "%" + params[0] + "%");
             return criteriaBuilder.and(predicate);
         };
